@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+  <div class="container">
+    <h1 class="mb-1 mt-2 text-center"><%= article.title %></h1>
+    <div class="text-muted mb-2 text-right">
+      Author: <a href="mailto:<%article.author.email%>">
+        <%= article.author.name %>
+        </a>
+    </div class='container'>
+    <div class="text-muted mb-2 text-right">
+      <%= article.createdAt.toLocaleDateString() %>
+    </div class='container'>
+    <div class="d-flex flex-row-reverse p-1">
+    <a href="/" class="btn btn-secondary">All Articles</a>
+    <% if(user) { %>
+      <% if(article.author.email === user.email) { %>
+      <a href="/articles/edit/<%= article.id %>" class="btn btn-info mr-3">Edit</a>
+    <% } %>
+    <% } %>
+    </div>
+    <div id="article" class="scroll" style="height: 100vh; overflow: scroll;">
+      <%- article.sanitizedHtml %>
+    </div>
+  </div>
+<%- include('partials/footer') %>
+
+
